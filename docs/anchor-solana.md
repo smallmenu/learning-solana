@@ -6,25 +6,32 @@
 
 ### 安装 Solana CLI 2.2.12
 
+```shell
 sh -c "$(curl -sSfL https://release.anza.xyz/v2.2.12/install)"
 
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
+
+```
 
 ### 安装 Anchor CLI 0.32.1
 
 通过 AVM 安装
 
+```shell
 cargo install --git https://github.com/solana-foundation/anchor avm --force
 
 avm --version
 
 avm install 0.32.1
+```
 
 ### 安装 Node 项目依赖
 
+```shell
 fnm use 22
 
 npm install --global yarn
+````
 
 ## 初始化一个项目
 
@@ -37,7 +44,7 @@ anchor init hello-solana --no-git
 ### 重新生成程序ID
 
 ```bash
-rm target/deploy/batch_send-keypair.json 
+rm target/deploy/xxx-keypair.json 
 anchor keys sync
 ```
 
