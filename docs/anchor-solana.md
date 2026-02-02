@@ -2,6 +2,11 @@
 
 ## 环境要求
 
+* Rust 1.89.0
+* Anchor CLI 0.32.1
+* Node 22
+* Solana 2.2.12
+
 ### 安装 Rust 1.89.0
 
 ### 安装 Solana CLI 2.2.12
@@ -81,7 +86,7 @@ anchor deploy
 # 部署到特定网络（如 devnet）
 anchor deploy --provider.cluster devnet
 
-# 部署到特定网络（如 devnet）
+# 部署到特定网络（如 localhost）
 anchor deploy --provider.cluster http://127.0.0.1:8899
 ```
 
@@ -124,7 +129,7 @@ solana program close <program_id> --bypass-warning
 
 feature `edition2024` is required
 
-### 1. build 时提示找不到  platform
+### build 时提示找不到  platform
 
 ```bash
 Failed to install platform-tools: HTTP status client error (404 Not Found) for url (https://github.com/anza-xyz/platform-tools/releases/download/v1.42/platform-tools-osx-x86_64.tar.bz2)
