@@ -125,6 +125,12 @@ solana program close <program_id> --bypass-warning
 
 ## 错误记录
 
+###
+
+
+
+
+
 ### feature `edition2024` is required
 
 feature `edition2024` is required
@@ -137,7 +143,13 @@ cargo build-sbf
 
 cargo build-sbf 用的不是你 shell 里的 cargo 
 
-通过 cargo build-sbf --version
+通过 cargo build-sbf --version 查看
+
+agave-install 安装的 solana 套件 可能没有：/platform-tools-sdk/sbf/dependencies/platform-tools/rust/lib
+
+agave-install 可以安装指定版本的套件。
+
+这时候需要：cargo build-sbf --force-tools-install 安装对应的套件
 
 ### build 时提示找不到  platform
 
