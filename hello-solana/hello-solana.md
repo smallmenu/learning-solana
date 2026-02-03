@@ -127,6 +127,17 @@ solana program close <program_id> --bypass-warning
 
 ## 错误记录
 
+
+### error: not a directory: 
+
+error: not a directory: '.../solana-release/bin/sdk/sbf/dependencies/platform-tools/rust/lib'
+
+cargo build-sbf --force-tools-install
+
+如果上述方法无效，请清除 Solana 缓存：
+
+rm -rf ~/.cache/solana/*
+
 ### feature `edition2024` is required
 
 feature `edition2024` is required
