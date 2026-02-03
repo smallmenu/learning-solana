@@ -18,9 +18,9 @@ describe("hello-solana", () => {
         const tx = await program.methods.initialize(data)
             .accounts({
                 newAccount: newAccountKp.publicKey,
-                // 签名者账户，用于支付创建新账户的费用,智能合约会验证该账户是否对交易进行了签名
+                // 签名者账户，用于支付创建新账户的费用，智能合约会验证该账户是否对交易进行了签名
                 signer: getProvider().wallet.publicKey,
-                systemProgram: web3.SystemProgram.programId,
+                // systemProgram: web3.SystemProgram.programId, // 可以不用写
             })
             // 注意：这里没有包含钱包的密钥对，因为 Anchor 会自动使用 getProvider().wallet 作为默认签名者
             .signers([newAccountKp])
