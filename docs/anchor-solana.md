@@ -129,6 +129,16 @@ solana program close <program_id> --bypass-warning
 
 feature `edition2024` is required
 
+cargo build
+
+cargo build-sbf
+
+出现的这个错误。通常是因为 Cargo 版本不支持 Rust 2024 Edition，但依赖 constant_time_eq v0.4.2 已经要求 edition2024
+
+cargo build-sbf 用的不是你 shell 里的 cargo 
+
+通过 cargo build-sbf --version
+
 ### build 时提示找不到  platform
 
 ```bash
