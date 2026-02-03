@@ -9,7 +9,7 @@
 
 ### 安装 Rust 1.89.0
 
-### 安装 Solana CLI 2.2.12
+### 安装 Solana CLI2.2.20
 
 ```shell
 sh -c "$(curl -sSfL https://release.anza.xyz/v2.2.12/install)"
