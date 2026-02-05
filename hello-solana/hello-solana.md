@@ -152,7 +152,7 @@ cargo build-sbf 用的不是你 shell 里的 cargo
 
 通过 cargo build-sbf --version 查看
 
-agave-install 安装的 solana 套件 可能没有：/platform-tools-sdk/sbf/dependencies/platform-tools/rust/lib
+agave-install 安装的 solana 套件 可能没有：`~/.local/share/solana/install/releases/<solana-version>/solana-release/bin/sdk/sbf/dependencies/platform-tools/rust/lib`
 
 agave-install 可以安装指定版本的套件。
 
