@@ -29,10 +29,10 @@ describe("hello-solana", () => {
         console.log("Your transaction signature", tx);
     });
 
-    it("mycalc ok", async () => {
+    it("mycalc init ok", async () => {
         // 首先创建一个账户，初始化数据为 100
         const newAccountKp = new web3.Keypair();
-        const initialData = new BN(100);
+        const initialData = new BN(42);
 
         // 步骤1：初始化账户
         const initTx = await program.methods.myinit(initialData)
@@ -64,12 +64,37 @@ describe("hello-solana", () => {
         console.log("Account data after mycalc:", account.data.toString());
 
         // 预期计算结果：
-        // data + ops * 2 = 100 + 5 * 2 = 110
-        // data - ops = 100 - 5 = 95
-        // data * ops = 100 * 5 = 500
-        // data / ops = 100 / 5 = 20
+        // data + ops * 2 = 42 + 5 * 2 = 52
+        // data - ops = 42 - 5 = 37
+        // data * ops = 42 * 5 = 210
+        // data / ops = 42 / 5 = 8
         // 保存的是最后的结果 (data / ops) = 20
         console.log("Expected final result (data / ops): 20");
         console.log("Actual result:", account.data.toNumber());
+    });
+
+    it("mycalc with pubkey ok", async () => {
+        // 使用固定的 pubkey 直接调用 mycalc
+        // 现在使用固定的 pubkey 调用 mycalc（这里使用刚创建的账户的 pubkey）
+        const fixedAccountPubkey = new web3.PublicKey("2D7y1ujHacMzNhDJfEmwc42FRcNSZk9wJHchojrH2kXE")
+        const ops = new BN(10);
+
+        const account1 = await program.account.myNewAccount.fetch(fixedAccountPubkey);
+        console.log("原始数据", account1.data);
+        console.log("操作数:", account1.data.toNumber());
+
+        const calcTx = await program.methods.mycalc(ops)
+            .accounts({
+                myAccount: fixedAccountPubkey,
+                signer: getProvider().wallet.publicKey,
+            })
+            .rpc();
+
+        console.log("✓ Mycalc transaction signature:", calcTx);
+
+        // 验证结果
+        const account2 = await program.account.myNewAccount.fetch(fixedAccountPubkey);
+        console.log("\n✓ 计算结果:");
+        console.log("实际最终结果:", account2.data.toNumber());
     });
 });

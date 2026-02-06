@@ -22,7 +22,7 @@ pub mod hello_solana {
     pub fn myinit(ctx: Context<MyInit>, data: u64) -> Result<()> {
         msg!("Invoke myinit from: {:?}", ctx.program_id);
 
-        msg!("New account: {}!", ctx.accounts.new_account.key());
+        msg!("New account: {}", ctx.accounts.new_account.key());
 
         // 保存账户的创建者地址，用于后续权限控制
         ctx.accounts.new_account.owner = ctx.accounts.signer.key();
@@ -30,7 +30,7 @@ pub mod hello_solana {
         ctx.accounts.new_account.data = data;
 
         msg!(
-            "Account owner set to: {:?}, Changed data to: {}!",
+            "Account owner set to: {:?}, Changed data to: {}",
             ctx.accounts.signer.key(),
             data
         );
