@@ -15,7 +15,6 @@
 sh -c "$(curl -sSfL https://release.anza.xyz/v2.2.12/install)"
 
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
-
 ```
 
 ### 安装 Anchor CLI 0.32.1
