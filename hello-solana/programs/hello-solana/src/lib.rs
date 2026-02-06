@@ -114,6 +114,7 @@ pub struct MyInit<'info> {
     #[account(mut)]
     pub signer: Signer<'info>,
 
+    // 系统程序，创建账户 init 必须由程序来执行，需要分配内存/设置owner/关闭帐户等，但 Anchor 框架会自动嵌入可以不用显式传递
     pub system_program: Program<'info, System>,
 }
 
@@ -131,6 +132,7 @@ pub struct MyCalc<'info> {
         constraint = my_account.owner == signer.key() @ CustomError::Unauthorized
     )]
     pub my_account: Account<'info, MyNewAccount>,
+    // 不需要系统程序，因为 mycalc 指令不会创建新账户，只是修改现有账户的数据
 }
 
 // #[account]：应用于结构体，为程序创建自定义帐户类型
