@@ -28,4 +28,48 @@ describe("hello-solana", () => {
 
         console.log("Your transaction signature", tx);
     });
+
+    it("mycalc ok", async () => {
+        // 首先创建一个账户，初始化数据为 100
+        const newAccountKp = new web3.Keypair();
+        const initialData = new BN(100);
+
+        // 步骤1：初始化账户
+        const initTx = await program.methods.myinit(initialData)
+            .accounts({
+                newAccount: newAccountKp.publicKey,
+                signer: getProvider().wallet.publicKey,
+            })
+            .signers([newAccountKp])
+            .rpc();
+
+        console.log("Init transaction signature:", initTx);
+
+        // 步骤2：调用 mycalc 指令，传入操作数 ops = 5
+        const ops = new BN(5);
+
+        const calcTx = await program.methods.mycalc(ops)
+            .accounts({
+                myAccount: newAccountKp.publicKey,
+                // 必须传入 signer，验证调用者是账户的创建者
+                signer: getProvider().wallet.publicKey,
+            })
+            .rpc();
+
+        console.log("Mycalc transaction signature:", calcTx);
+
+        // 步骤3：验证结果
+        // 获取账户的最新数据
+        const account = await program.account.myNewAccount.fetch(newAccountKp.publicKey);
+        console.log("Account data after mycalc:", account.data.toString());
+
+        // 预期计算结果：
+        // data + ops * 2 = 100 + 5 * 2 = 110
+        // data - ops = 100 - 5 = 95
+        // data * ops = 100 * 5 = 500
+        // data / ops = 100 / 5 = 20
+        // 保存的是最后的结果 (data / ops) = 20
+        console.log("Expected final result (data / ops): 20");
+        console.log("Actual result:", account.data.toNumber());
+    });
 });
